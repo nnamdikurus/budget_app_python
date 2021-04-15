@@ -1,0 +1,72 @@
+# STEPS TO SOLVING THE TASK
+# i) Create a budget class
+# ii) Create objects to instantiate the class
+# iii) create functions to accomplish the sub-tasks
+
+class Budget:       # This is the class created
+
+    intro = "Welcome to Budget App"
+    asterix = "**"*8
+    print(asterix + intro + asterix)
+
+    def __init__(self,name,balance):
+             # This is the init function
+        self.name = name
+        self.balance = balance
+
+
+    def deposit(self,amount):
+        old_balance = self.balance
+        self.amount = amount
+        self.balance = self.balance + self.amount
+        return "{} has been deposited into your {} account.\nYour current balance is {}: Previous balance was {}".format(self.amount,self.name,self.balance, old_balance)
+
+
+    def withdraw(self,amount):
+        if self.balance < amount:
+            return "Insufficient balance"
+        else:
+            self.balance = self.balance - amount
+            return "{} was withdrawn, account balance is {}".format(amount,self.balance)
+
+
+    def check_balance(self):
+        return "Your current account balance is {}".format(self.balance)
+
+
+    def transfer(self,amount,transfer_to):
+        if self.balance < amount:
+            return "Insufficient funds"
+        else:
+            self.balance = self.balance - amount
+            transfer_to.balance = transfer_to.balance + amount
+
+            feedback = "You have transfered {} to the {} category\n".format(amount, transfer_to.name)
+            feedback+= "Your account balance for {} is {}\nWhile ".format(self.name, self.balance)
+            feedback+= "Your account balance for {} is {}".format(transfer_to.name, transfer_to.balance)
+
+            return feedback
+
+# OBJECTS THAT INSTATNTIATE THE CLASS
+food_budget = Budget("food",1000)
+clothing_budget = Budget("clothing", 3500)
+entertainment_budget = Budget("entertainment", 2000)
+
+print(food_budget.deposit(5000))       # Calling the instantiation of the object for the method "Deposit"
+print(clothing_budget.deposit(3000))
+print(entertainment_budget.deposit(4500))
+
+print(food_budget.withdraw(500))       # Calling the instantiation of the object for the method "Withdraw"
+print(clothing_budget.withdraw(1500))
+print(entertainment_budget.withdraw(2500))
+
+
+print(food_budget.check_balance())       # Calling the instantiation of the object for the method "Check_balance"
+print(clothing_budget.check_balance())
+print(entertainment_budget.check_balance())
+
+
+print(food_budget.transfer(1000,entertainment_budget))      # Calling the instantiation of the object for the method "transfer"
+
+
+
